@@ -82,11 +82,15 @@ void guessing_the_gol(int hands[3][2], int gol_person, int gol_hand, int *poochs
 	)
 	{
 		printf("\n\nYou won!\n");
+		sleep(6);
 		*poochs = 10;
 	}
 	else
 	{
+		printf("\n\n");
+		show_the_gol(hands);
 		printf("\n\nYou lost! you chosed a pooch hand!\n");
+		sleep(6);
 		*poochs = 10;
 	}
 }
@@ -113,12 +117,16 @@ void hit_a_pooch(int hands[3][2], int visual_hands[3][2],  int *poochs)
 		if (*poochs == 5)
 		{
 			printf("\n\nYou won!\n");
+			sleep(6);
 			*poochs = 10;
 		}
 	}
 	else
 	{
+		printf("\n\n");
+		show_the_gol(hands);
 		printf("\n\nYou lost! you pooched a gol hand!\n");
+		sleep(6);
 		*poochs = 10;
 	}
 }
@@ -167,7 +175,8 @@ int main()
 
 	int user_choice;
 	
-	while (*poochs != 10) {
+	while (*poochs != 10) 
+	{
 		printf("\e[1;1H\e[2J");
 		show_menu(hands, visual_hands);
 
