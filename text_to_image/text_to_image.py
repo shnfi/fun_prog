@@ -13,7 +13,10 @@ for i in text :
 
 url = f"https://www.google.com/search?q={text}&source=lnms&udm=2"
 
+print("\nwait for it...")
+
 res = requests.get(url).text
+
 parsed_url = BeautifulSoup(res, "html.parser")
 
 images_count = len(parsed_url.find_all("img"))
@@ -26,3 +29,4 @@ if platform.system() == "Linux" or "Darwin" :
 	os.system(f"firefox {image_url}")
 elif platform.system() == "Windows" :
 	os.system(f"start firefox {image_url}")
+

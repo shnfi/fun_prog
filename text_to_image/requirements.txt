@@ -1,0 +1,5 @@
+os
+bs4
+requests
+random
+platform
