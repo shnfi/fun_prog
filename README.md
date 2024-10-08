@@ -9,3 +9,6 @@ gol ya pooch is an old and interesting game . <br> [Wikipedia](https://fa.wikipe
 
 ## text to image
 can we name it artificial intellegence ? i don't think so, i think it's a web scraper :)
+
+## fibonacci sequence
+fibonacci sequesnce is a sequence of nubers that each number is the sum of two previous numbers . <br> [Wikipedia](https://en.wikipedia.org/wiki/Fibonacci_sequence)
