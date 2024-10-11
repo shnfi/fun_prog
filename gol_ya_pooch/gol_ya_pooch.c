@@ -24,6 +24,8 @@
 
 */ 
 
+# define NOT_VLD_ERR "[E] invalid choice!"
+
 void randomize_the_gol(int hands[3][2], int r_person, int r_hand)
 {
 	hands[r_person][r_hand] = 1;
@@ -61,9 +63,9 @@ void show_visual_hands(int visual_hands[3][2])
 
 void show_menu(int hands[3][2], int visual_hands[3][2])
 {
-	//show_the_gol(hands); // debug line. remove me later!
+	show_the_gol(hands); // debug line. remove me later!
    	show_visual_hands(visual_hands);
-    printf("[1] guess the gol\n[2] hit a pooch\n[3] using a card (coming soon)\n[4] exit\n\n> ");
+    printf("[1] guess the gol\n[2] hit a pooch\n[3] using a card\n[4] exit\n\n> ");
 }
 
 void guessing_the_gol(int hands[3][2], int gol_person, int gol_hand, int *poochs)
@@ -75,6 +77,20 @@ void guessing_the_gol(int hands[3][2], int gol_person, int gol_hand, int *poochs
 
 	printf("His hand > ");
 	scanf("%d", &gol_hand_guess);
+
+	if (gol_person_guess <= 0 || gol_person_guess >= 4) 
+	{
+		printf("\n\n%s\n", NOT_VLD_ERR);
+		sleep(6);
+		*poochs = 10;
+	}
+	
+	if (gol_hand_guess <= 0 || gol_hand_guess >= 3) 
+	{
+		printf("\n\n%s\n", NOT_VLD_ERR);
+		sleep(6);
+		*poochs = 10;
+	}
 
 	if (
 		gol_person_guess == gol_person && 
@@ -105,6 +121,20 @@ void hit_a_pooch(int hands[3][2], int visual_hands[3][2],  int *poochs)
     printf("His hand > ");
     scanf("%d", &pooch_hand);
 
+	if (pooch_person <= 0 || pooch_person >= 4) 
+	{
+		printf("\n\n%s\n", NOT_VLD_ERR);
+		sleep(6);
+		*poochs = 10;
+	}
+	
+	if (pooch_hand <= 0 || pooch_hand >= 3) 
+	{
+		printf("\n\n%s\n", NOT_VLD_ERR);
+		sleep(6);
+		*poochs = 10;
+	}
+
 	pooch_person--;
 	pooch_hand--;
 
@@ -131,14 +161,40 @@ void hit_a_pooch(int hands[3][2], int visual_hands[3][2],  int *poochs)
 	}
 }
 
-void using_a_card()
-{}
-
 void quit_the_game(int *poochs)
 {
 	printf("\n\nThanks for playing!\n");
 	*poochs = 10;
 }
+
+void anten_card(int hands[3][2])
+{
+	int target;
+
+	printf("\n\nYour target > ");
+	scanf("%d", &target);
+
+	if (target <= 0 || target >= 4) printf("\n\n%s\n", NOT_VLD_ERR);
+
+	target--;
+
+	if (hands[target][0] != 1 && hands[target][1] != 1)
+	{
+		printf("\n\nI CANNOT SEE THE GOL!\n");
+		sleep(2);
+	}
+	else
+	{
+		printf("\n\nI CAN SEE THE GOL\n");
+		sleep(2);
+	}
+}
+
+void sang_moft_card()
+{}
+
+void hazfe_dast_card()
+{}
 
 int main()
 {
@@ -193,7 +249,30 @@ int main()
 				break;
 	
 			case 3 : 
-				using_a_card(); // coming soon (actually im gonna code it myself so...)
+				int c;
+				printf("\n\n[1] Anten\n[2] Sang moft (coming soon)\n[3] Hazfe dast (coming soon)\n\n> ");
+				scanf("%d", &c);
+
+				switch (c)
+				{
+					case 1 : 
+						anten_card(hands);
+						break;
+
+					case 2 : 
+						sang_moft_card();
+						break;
+
+					case 3 : 
+						hazfe_dast_card();
+						break;
+
+					default :
+						printf("\n\n%s\n", NOT_VLD_ERR);
+						sleep(2);
+						break;
+				}
+
 				break;
 	
 			case 4 : 
@@ -201,7 +280,8 @@ int main()
 				break;
 	
 			default : 
-				printf("\n\n[E] invalid choice!");
+				printf("\n\n%s\n", NOT_VLD_ERR);
+				sleep(2);
 				break;
 		}
 	}
