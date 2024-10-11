@@ -63,7 +63,7 @@ void show_visual_hands(int visual_hands[3][2])
 
 void show_menu(int hands[3][2], int visual_hands[3][2])
 {
-	show_the_gol(hands); // debug line. remove me later!
+	//show_the_gol(hands); // debug line. remove me later!
    	show_visual_hands(visual_hands);
     printf("[1] guess the gol\n[2] hit a pooch\n[3] using a card\n[4] exit\n\n> ");
 }
