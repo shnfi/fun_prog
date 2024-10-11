@@ -24,7 +24,8 @@
 
 */ 
 
-# define NOT_VLD_ERR "[E] invalid choice!"
+# define NV_ERR "[E] invalid choice!"
+# define COOR_ERR "[E] card out of range!"
 
 void randomize_the_gol(int hands[3][2], int r_person, int r_hand)
 {
@@ -80,14 +81,14 @@ void guessing_the_gol(int hands[3][2], int gol_person, int gol_hand, int *poochs
 
 	if (gol_person_guess <= 0 || gol_person_guess >= 4) 
 	{
-		printf("\n\n%s\n", NOT_VLD_ERR);
+		printf("\n\n%s\n", NV_ERR);
 		sleep(6);
 		*poochs = 10;
 	}
 	
 	if (gol_hand_guess <= 0 || gol_hand_guess >= 3) 
 	{
-		printf("\n\n%s\n", NOT_VLD_ERR);
+		printf("\n\n%s\n", NV_ERR);
 		sleep(6);
 		*poochs = 10;
 	}
@@ -123,14 +124,14 @@ void hit_a_pooch(int hands[3][2], int visual_hands[3][2],  int *poochs)
 
 	if (pooch_person <= 0 || pooch_person >= 4) 
 	{
-		printf("\n\n%s\n", NOT_VLD_ERR);
+		printf("\n\n%s\n", NV_ERR);
 		sleep(6);
 		*poochs = 10;
 	}
 	
 	if (pooch_hand <= 0 || pooch_hand >= 3) 
 	{
-		printf("\n\n%s\n", NOT_VLD_ERR);
+		printf("\n\n%s\n", NV_ERR);
 		sleep(6);
 		*poochs = 10;
 	}
@@ -167,25 +168,35 @@ void quit_the_game(int *poochs)
 	*poochs = 10;
 }
 
-void anten_card(int hands[3][2])
+void anten_card(int hands[3][2], int *poochs, int *remaining)
 {
-	int target;
-
-	printf("\n\nYour target > ");
-	scanf("%d", &target);
-
-	if (target <= 0 || target >= 4) printf("\n\n%s\n", NOT_VLD_ERR);
-
-	target--;
-
-	if (hands[target][0] != 1 && hands[target][1] != 1)
+	if (*remaining == 1)
 	{
-		printf("\n\nI CANNOT SEE THE GOL!\n");
-		sleep(2);
+		int target;
+
+		printf("\n\nYour target > ");
+		scanf("%d", &target);
+
+		if (target <= 0 || target >= 4) printf("\n\n%s\n", NV_ERR);
+
+		target--;
+
+		if (hands[target][0] != 1 && hands[target][1] != 1)
+		{
+			printf("\n\nI CANNOT SEE THE GOL!\n");
+			sleep(2);
+		}
+		else
+		{
+			printf("\n\nI CAN SEE THE GOL\n");
+			sleep(2);
+		}
+
+		*remaining -= 1;
 	}
 	else
 	{
-		printf("\n\nI CAN SEE THE GOL\n");
+		printf("\n\n%s\n", COOR_ERR);
 		sleep(2);
 	}
 }
@@ -203,6 +214,9 @@ int main()
 	int random_person, random_hand;
 	int *poochs = calloc(1, sizeof(int));
 	*poochs = 0;
+
+	int *remaining_antens = calloc(1, sizeof(int));
+	*remaining_antens = 1;
 
 	srand(time(NULL));
 	printf("\e[1;1H\e[2J");
@@ -256,7 +270,7 @@ int main()
 				switch (c)
 				{
 					case 1 : 
-						anten_card(hands);
+						anten_card(hands, poochs, remaining_antens);
 						break;
 
 					case 2 : 
@@ -268,7 +282,7 @@ int main()
 						break;
 
 					default :
-						printf("\n\n%s\n", NOT_VLD_ERR);
+						printf("\n\n%s\n", NV_ERR);
 						sleep(2);
 						break;
 				}
@@ -280,7 +294,7 @@ int main()
 				break;
 	
 			default : 
-				printf("\n\n%s\n", NOT_VLD_ERR);
+				printf("\n\n%s\n", NV_ERR);
 				sleep(2);
 				break;
 		}
