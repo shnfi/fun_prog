@@ -17,10 +17,9 @@
 
 /*
 
-	REMINDER 
+	TODO 
 
 	- configuring the cards and they're usages .
-	- and probably the hardest one, creating the scoreboard system .
 
 */ 
 
@@ -98,6 +97,8 @@ void guessing_the_gol(int hands[3][2], int gol_person, int gol_hand, int *poochs
 		gol_hand_guess == gol_hand 
 	)
 	{
+		printf("\n\n");
+		show_the_gol(hands);
 		printf("\n\nYou won!\n");
 		sleep(6);
 		*poochs = 10;
@@ -147,6 +148,8 @@ void hit_a_pooch(int hands[3][2], int visual_hands[3][2],  int *poochs)
 		
 		if (*poochs == 5)
 		{
+			printf("\n\n");
+			show_the_gol(hands);
 			printf("\n\nYou won!\n");
 			sleep(6);
 			*poochs = 10;
