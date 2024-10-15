@@ -267,7 +267,7 @@ int main()
 	
 			case 3 : 
 				int c;
-				printf("\n\n[1] Anten\n[2] Sang moft (coming soon)\n[3] Hazfe dast (coming soon)\n\n> ");
+				printf("\n\n[1] Anten (%d remaining)\n[2] Sang moft (coming soon)\n[3] Hazfe dast (coming soon)\n\n> ", *remaining_antens);
 				scanf("%d", &c);
 
 				switch (c)
