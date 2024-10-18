@@ -205,8 +205,37 @@ void anten_card(int hands[3][2], int *poochs, int *remaining)
 	}
 }
 
-void hazfe_dast_card()
-{}
+void hazfe_dast_card(int hands[3][2], int visual_hands[3][2], int *poochs, int *remaining)
+{
+	if (*remaining == 1)
+	{
+		int random_person = rand() % (2 - 0 + 1) + 0;
+		int random_hand = rand() % (1 - 0 + 1) + 0;
+
+		if (hands[random_person][random_hand] != 1)
+		{
+			hands[random_person][random_hand] = 2;
+			visual_hands[random_person][random_hand] = 2;
+			*poochs += 1;
+	
+			if (*poochs == 5)
+			{
+				printf("\n\n");
+				show_the_gol(hands);
+				printf("\n\nYou won!\n");
+				sleep(6);
+				*poochs = 10;
+			}
+		}
+
+		*remaining -= 1;
+	}
+	else
+	{
+		printf("\n\n%s\n", COOR_ERR);
+		sleep(2);
+	}
+}
 
 void sang_moft_card()
 {}
@@ -222,6 +251,9 @@ int main()
 
 	int *remaining_antens = calloc(1, sizeof(int));
 	*remaining_antens = 1;
+
+	int *remaining_hazfe_dasts = calloc(1, sizeof(int));
+	*remaining_hazfe_dasts = 1;
 
 	srand(time(NULL));
 	printf("\e[1;1H\e[2J");
@@ -269,7 +301,7 @@ int main()
 	
 			case 3 : 
 				int c;
-				printf("\n\n[1] Anten (%d remaining)\n[2] Hazfe dast (coming soon)\n[3] Sang moft (coming soon)\n\n> ", *remaining_antens);
+				printf("\n\n[1] Anten (%d remaining)\n[2] Hazfe dast (%d remaining)\n[3] Sang moft (coming soon)\n\n> ", *remaining_antens, *remaining_hazfe_dasts);
 				scanf("%d", &c);
 
 				switch (c)
@@ -279,7 +311,7 @@ int main()
 						break;
 
 					case 2 : 
-						hazfe_dast_card();
+						hazfe_dast_card(hands, visual_hands, poochs, remaining_hazfe_dasts);
 						break;
 
 					case 3 : 
