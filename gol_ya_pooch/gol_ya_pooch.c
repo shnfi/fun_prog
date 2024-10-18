@@ -205,11 +205,12 @@ void anten_card(int hands[3][2], int *poochs, int *remaining)
 	}
 }
 
+void hazfe_dast_card()
+{}
+
 void sang_moft_card()
 {}
 
-void hazfe_dast_card()
-{}
 
 int main()
 {
@@ -268,7 +269,7 @@ int main()
 	
 			case 3 : 
 				int c;
-				printf("\n\n[1] Anten (%d remaining)\n[2] Sang moft (coming soon)\n[3] Hazfe dast (coming soon)\n\n> ", *remaining_antens);
+				printf("\n\n[1] Anten (%d remaining)\n[2] Hazfe dast (coming soon)\n[3] Sang moft (coming soon)\n\n> ", *remaining_antens);
 				scanf("%d", &c);
 
 				switch (c)
@@ -278,11 +279,11 @@ int main()
 						break;
 
 					case 2 : 
-						sang_moft_card();
+						hazfe_dast_card();
 						break;
 
 					case 3 : 
-						hazfe_dast_card();
+						sang_moft_card();
 						break;
 
 					default :
