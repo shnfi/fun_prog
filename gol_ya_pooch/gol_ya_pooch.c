@@ -236,34 +236,40 @@ void hazfe_dast_card(int hands[3][2], int visual_hands[3][2], int *poochs, int *
 
 void sang_moft_card(int hands[3][2], int visual_hands[3][2], int *poochs, int *remaining)
 {
+	if (*remaining == 1) {
+		int gol_person_guess, gol_hand_guess;
 	
-	int gol_person_guess, gol_hand_guess;
-
-	printf("\n\nYour target > ");
-	scanf("%d", &gol_person_guess);
-
-	printf("His hand > ");
-	scanf("%d", &gol_hand_guess);
-
-	gol_person_guess--;
-	gol_hand_guess--;
-
-	if (hands[gol_person_guess][gol_hand_guess] == 1)
-	{
-		printf("\n\n");
-		show_the_gol(hands);
-		printf("\n\nYou won!\n");
-		sleep(6);
-		*poochs = 10;
+		printf("\n\nYour target > ");
+		scanf("%d", &gol_person_guess);
+	
+		printf("His hand > ");
+		scanf("%d", &gol_hand_guess);
+	
+		gol_person_guess--;
+		gol_hand_guess--;
+	
+		if (hands[gol_person_guess][gol_hand_guess] == 1)
+		{
+			printf("\n\n");
+			show_the_gol(hands);
+			printf("\n\nYou won!\n");
+			sleep(6);
+			*poochs = 10;
+		}
+		else
+		{
+			hands[gol_person_guess][gol_hand_guess] = 2;
+			visual_hands[gol_person_guess][gol_hand_guess] = 2;
+			*poochs += 1;
+		}
+	
+		*remaining -= 1;
 	}
 	else
 	{
-		hands[gol_person_guess][gol_hand_guess] = 2;
-		visual_hands[gol_person_guess][gol_hand_guess] = 2;
-		*poochs += 1;
+		printf("\n\n%s\n", COOR_ERR);
+		sleep(2);
 	}
-
-	*remaining -= 1;
 }
 
 
