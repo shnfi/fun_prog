@@ -19,7 +19,7 @@
 
 	TODO 
 
-	- do some clean code on method of checking for the gol .
+	#
 
 */ 
 
@@ -69,7 +69,7 @@ void show_menu(int hands[3][2], int visual_hands[3][2])
     printf("[1] guess the gol\n[2] hit a pooch\n[3] using a card\n[4] exit\n\n> ");
 }
 
-void guessing_the_gol(int hands[3][2], int gol_person, int gol_hand, int *poochs)
+void guessing_the_gol(int hands[3][2], int *poochs)
 {
 	int gol_person_guess, gol_hand_guess;
 
@@ -93,10 +93,7 @@ void guessing_the_gol(int hands[3][2], int gol_person, int gol_hand, int *poochs
 		*poochs = 10;
 	}
 
-	if (
-		gol_person_guess == gol_person && 
-		gol_hand_guess == gol_hand 
-	)
+	if (hands[gol_person_guess][gol_hand_guess] == 1)
 	{
 		printf("\n\n");
 		show_the_gol(hands);
@@ -293,24 +290,7 @@ int main()
 	random_person = rand() % (2 - 0 + 1) + 0;
 	random_hand = rand() % (1 - 0 + 1) + 0;
 
-	int gol_person, gol_hand;
-
 	randomize_the_gol(hands, random_person, random_hand);
-
-	for (int i = 0; i < 3; i++)
-	{
-		for (int j = 0; j < 2; j++)
-		{
-			if (hands[i][j] == 1)
-			{
-				gol_person = i;
-				gol_hand = j;
-			}
-		}
-	}
-
-	gol_person++;
-	gol_hand++;
 
 	int user_choice;
 	
@@ -324,7 +304,7 @@ int main()
 		switch (user_choice)
 		{
 			case 1 : 
-				guessing_the_gol(hands, gol_person, gol_hand, poochs);
+				guessing_the_gol(hands, poochs);
 				break;
 	
 			case 2 : 
