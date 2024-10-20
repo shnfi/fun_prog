@@ -19,7 +19,7 @@
 
 	TODO 
 
-	- configuring the cards and they're usages .
+	- do some clean code on method of checking for the gol .
 
 */ 
 
@@ -237,8 +237,37 @@ void hazfe_dast_card(int hands[3][2], int visual_hands[3][2], int *poochs, int *
 	}
 }
 
-void sang_moft_card()
-{}
+void sang_moft_card(int hands[3][2], int visual_hands[3][2], int *poochs, int *remaining)
+{
+	
+	int gol_person_guess, gol_hand_guess;
+
+	printf("\n\nYour target > ");
+	scanf("%d", &gol_person_guess);
+
+	printf("His hand > ");
+	scanf("%d", &gol_hand_guess);
+
+	gol_person_guess--;
+	gol_hand_guess--;
+
+	if (hands[gol_person_guess][gol_hand_guess] == 1)
+	{
+		printf("\n\n");
+		show_the_gol(hands);
+		printf("\n\nYou won!\n");
+		sleep(6);
+		*poochs = 10;
+	}
+	else
+	{
+		hands[gol_person_guess][gol_hand_guess] = 2;
+		visual_hands[gol_person_guess][gol_hand_guess] = 2;
+		*poochs += 1;
+	}
+
+	*remaining -= 1;
+}
 
 
 int main()
@@ -254,6 +283,9 @@ int main()
 
 	int *remaining_hazfe_dasts = calloc(1, sizeof(int));
 	*remaining_hazfe_dasts = 1;
+
+	int *remaining_sang_mofts = calloc(1, sizeof(int));
+	*remaining_sang_mofts = 1;
 
 	srand(time(NULL));
 	printf("\e[1;1H\e[2J");
@@ -301,7 +333,7 @@ int main()
 	
 			case 3 : 
 				int c;
-				printf("\n\n[1] Anten (%d remaining)\n[2] Hazfe dast (%d remaining)\n[3] Sang moft (coming soon)\n\n> ", *remaining_antens, *remaining_hazfe_dasts);
+				printf("\n\n[1] Anten (%d remaining)\n[2] Hazfe dast (%d remaining)\n[3] Sang moft (%d remaining)\n\n> ", *remaining_antens, *remaining_hazfe_dasts, *remaining_sang_mofts);
 				scanf("%d", &c);
 
 				switch (c)
@@ -315,7 +347,7 @@ int main()
 						break;
 
 					case 3 : 
-						sang_moft_card();
+						sang_moft_card(hands, visual_hands, poochs, remaining_sang_mofts);
 						break;
 
 					default :
