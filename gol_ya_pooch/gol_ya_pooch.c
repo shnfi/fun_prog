@@ -11,7 +11,7 @@
 	1 -> has the gol .
 	2 -> pooch .
 
-	ending tasks of the main method by setting the "poochs" to 10 .
+	ending tasks of the main method by setting the "*poochs" variable to 10 .
 
 */
 
