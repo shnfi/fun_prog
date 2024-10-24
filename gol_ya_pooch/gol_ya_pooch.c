@@ -79,9 +79,6 @@ void guessing_the_gol(int hands[3][2], int *poochs)
 	printf("His hand > ");
 	scanf("%d", &gol_hand_guess);
 
-	gol_person_guess--;
-	gol_hand_guess--;
-
 	if (gol_person_guess <= 0 || gol_person_guess >= 4) 
 	{
 		printf("\n\n%s\n", NV_ERR);
@@ -95,6 +92,9 @@ void guessing_the_gol(int hands[3][2], int *poochs)
 		sleep(6);
 		*poochs = 10;
 	}
+
+	gol_person_guess--;
+	gol_hand_guess--;
 
 	if (hands[gol_person_guess][gol_hand_guess] == 1)
 	{
