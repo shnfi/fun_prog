@@ -3,22 +3,15 @@
 #include <time.h>
 #include <string.h>
 
-char *encode(int ran, char val[], int s, int m, int h)
+char *encode(char val[], int s)
 {
-	int n = 1;
-	int key;
 	char *str = malloc(strlen(val));
 
 	memset(str, 0, sizeof(str));
 
-	if (ran == 1) key = s;
-	else if (ran == 2) key = m;
-	else if (ran == 3) key = h;
-
 	for (int i = 0; i < strlen(val); i++)
 	{
-		str[strlen(str)] = (char) (key + 65) + n;
-		n += ran;
+		str[strlen(str)] = (char) (s + 65) + i;
 	}
 
 	return str;
@@ -31,15 +24,13 @@ int main(int argc, char **argv)
 	
 	srand(time(NULL));
 	
-	int ran = rand() % (3 - 1 + 1) + 1;
-
 	/*
 	 * starting to encode
 	 */
 
 	for (int i = 1; i < argc; i++)
 	{
-		printf("%s\n", encode(ran, argv[i], tm.tm_sec, tm.tm_min, tm.tm_hour));
+		printf("%s\n", encode(argv[i], tm.tm_sec + i));
 	}
 
 	return 0;
