@@ -17,10 +17,8 @@ char *encode(int ran, char val[], int s, int m, int h)
 
 	for (int i = 0; i < strlen(val); i++)
 	{
-		int x = rand() % (5 - 1 + 1) + 1;
-
 		str[strlen(str)] = (char) (key + 65) + n;
-		n += x;
+		n += ran;
 	}
 
 	return str;
