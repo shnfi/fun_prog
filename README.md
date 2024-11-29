@@ -12,3 +12,6 @@ can we name it artificial intellegence ? i don't think so, i think it's a web sc
 
 ## fibonacci sequence
 fibonacci sequesnce is a sequence of nubers that each number is the sum of two previous numbers . <br> [Wikipedia](https://en.wikipedia.org/wiki/Fibonacci_sequence) 
+
+## creepy encoder
+creepy encoder just do what is it saying in its name, encrypt a plain text in a creepy way :), can you decode the encrypted value ?
