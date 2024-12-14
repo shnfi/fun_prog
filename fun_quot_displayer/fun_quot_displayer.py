@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import random
 from colorama import Fore as f, Style as s
 
