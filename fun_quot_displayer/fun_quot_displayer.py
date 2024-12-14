@@ -1,4 +1,5 @@
 import random
+from colorama import Fore as f, Style as s
 
 quotes = [
 	"Keep going! You’re halfway to almost giving up!",
@@ -23,7 +24,7 @@ quotes = [
     "I always wanted to be somebody, but now I realize I should have been more specific.",
     "Age is something that doesn’t matter, unless you are a cheese.",
     "I’m not insane. My mother had me tested.",
-	"The Big Bang Theory",
+	"The Big Bang Theory.",
     "To steal ideas from one person is plagiarism; to steal from many is research.",
     "I used to think I was indecisive, but now I'm not too sure.",
     "Cleaning up is just putting stuff in less obvious places.",
@@ -64,9 +65,13 @@ faces = [
 	"( ͡° ͜ʖ ͡°)",
 	"( ͡ᵔ ͜ʖ ͡ᵔ )",
 	"( ° ͜ʖ °)",
-	"ʕ ͡° ʖ̯ ͡°ʔ",
 	"( ͝° ͜ʖ͡°)",
 ]
 
-print(f"\n{random.choice(faces)}  {random.choice(quotes)}\n")
+fg_colors = [
+	f.LIGHTMAGENTA_EX, 
+	f.LIGHTGREEN_EX,
+	f.LIGHTYELLOW_EX,
+]
 
+print(s.BRIGHT + random.choice(fg_colors) + f"\n  {random.choice(faces)}  {random.choice(quotes)}\n")
