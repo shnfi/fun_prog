@@ -15,3 +15,6 @@ fibonacci sequesnce is a sequence of nubers that each number is the sum of two p
 
 ## creepy encoder
 creepy encoder just do what is it saying in its name, encrypt a plain text in a creepy way :), can you decode the encrypted value ?
+
+## fun quot displayer
+a fun quot displayer for your terminals to show a random quot between <strong>65</strong> quotes at the starting of the terminal that may could make you laugh :)
