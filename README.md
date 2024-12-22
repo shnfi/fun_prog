@@ -20,4 +20,4 @@ creepy encoder just do what is it saying in its name, encrypt a plain text in a 
 a fun quot displayer for your terminals to show a random quot between <strong>65</strong> quotes at the starting of the terminal that may could make you laugh :)
 
 ## snake and ladders AI
-AI plays snake and ladders and we see how he can win the game . <br> [Wikipedia](https://en.wikipedia.org/wiki/Snakes_and_ladders)
+AI plays snake and ladders and we see how it can learn from it's loses and grow to win the game . <br> [Wikipedia](https://en.wikipedia.org/wiki/Snakes_and_ladders)
