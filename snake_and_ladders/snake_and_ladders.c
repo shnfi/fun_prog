@@ -4,11 +4,18 @@
 #include <unistd.h>
 #include <time.h>
 
+
+struct snakes
+{
+	int founded;
+	int cordinate[7][2];
+};
+
 void show(char *board[10][10], int *x, int *y)
 {
 	system("clear");
 
-	printf("x %d - y %d\n", *x + 1, *y + 1);
+	printf("x %d - y %d\n------------------------------\n", *x + 1, *y + 1);
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -20,7 +27,7 @@ void show(char *board[10][10], int *x, int *y)
 	}
 }
 
-void move(char *board[10][10], int *x, int *y, bool *WIN, int *loses)
+void move(char *board[10][10], int *x, int *y, bool *WIN, int *loses, struct snakes *snakes)
 {
 	printf("\n");
 
@@ -51,16 +58,29 @@ void move(char *board[10][10], int *x, int *y, bool *WIN, int *loses)
 	}
 	else if (board[*y][*x] == "x")
 	{
-		board[*y][*x] = "x";
-		board[0][0] = "o";
-		*loses += 1;
+		bool is_this_cordinate_a_founded_snake = false;
 
-		/*
-		 * reseting the cordinate
-		 */
+		for (int i = 0; i < snakes->founded; i++)
+			if (snakes->cordinate[i][0] == *y && snakes->cordinate[i][1] == *x)
+				is_this_cordinate_a_founded_snake = true;
 
-		*x = 0;
-		*y = 0;
+		if (is_this_cordinate_a_founded_snake)
+		{
+			*x += 1;
+		}
+		else
+		{
+			snakes->cordinate[snakes->founded][0] = *y;
+			snakes->cordinate[snakes->founded][1] = *x;
+
+			snakes->founded += 1;
+
+			board[*y][*x] = "x";
+			board[0][0] = "o";
+			*loses += 1;
+			*x = 0;
+			*y = 0;
+		}
 	}
 	else if (board[*y][*x] == "H")
 	{
@@ -70,12 +90,22 @@ void move(char *board[10][10], int *x, int *y, bool *WIN, int *loses)
 	}
 }
 
+
 int main()
 {
 	int x = 0, y = 0;
 	int loses = 0;
 
 	bool WIN = false;
+
+	/*
+	 * array to remember any  snake if player lost to them
+	 */
+
+	struct snakes snakes = {
+		0,
+		{},
+	};
 
 	/*
 	 * 'o' = player
@@ -100,7 +130,7 @@ int main()
 	while (!WIN)
 	{
 		show(board, &x, &y);
-		move(board, &x, &y, &WIN, &loses);
+		move(board, &x, &y, &WIN, &loses, &snakes);
 		sleep(1);
 	}
 
