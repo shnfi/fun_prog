@@ -21,3 +21,6 @@ a fun quot displayer for your terminals to show a random quot between <strong>65
 
 ## snake and ladders AI
 AI plays snake and ladders and we see how it can learn from it's loses and grow to win the game . <br> [Wikipedia](https://en.wikipedia.org/wiki/Snakes_and_ladders)
+
+## laliga table simulator
+yeah, if you like soccer and your want to simulate a whole laliga season, here you are! <br> [Wikipedia](https://en.wikipedia.org/wiki/La_Ligahttps://en.wikipedia.org/wiki/La_Liga)
