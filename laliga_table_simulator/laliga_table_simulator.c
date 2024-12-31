@@ -8,6 +8,7 @@ typedef struct club
 {
 	char name[20];
 	int point;
+	int pl;
 } CLUB;
 
 void simulate(CLUB clubs[], bool uesr_want_to_see_fixtures)
@@ -66,6 +67,9 @@ void simulate(CLUB clubs[], bool uesr_want_to_see_fixtures)
 						printf("\033[0m");
 					}
 				}
+
+				clubs[i].pl += 1;
+				clubs[j].pl += 1;
 			}
 		}
 	
@@ -96,7 +100,11 @@ void simulate(CLUB clubs[], bool uesr_want_to_see_fixtures)
 		}
 	}
 
-	printf("  ------------------------------------\n");
+	printf("  ------------------------------------------\n");
+
+	printf(" |   pos    club                 pl   pt    |\n");
+
+	printf("  ------------------------------------------\n");
 
 	for (int i = 0; i < 20; i++)
 	{
@@ -133,10 +141,10 @@ void simulate(CLUB clubs[], bool uesr_want_to_see_fixtures)
 			printf("\033[0m");
 		}
 
-		printf("[%02d]   %s   %*d   |\n", i + 1, clubs[i].name, 20 - (int) strlen(clubs[i].name), clubs[i].point);
+		printf("[%02d]   %s   %*d   %d    |\n", i + 1, clubs[i].name, 20 - (int) strlen(clubs[i].name), clubs[i].pl, clubs[i].point);
 	}
 
-	printf("  ------------------------------------\n\n");
+	printf("  ------------------------------------------\n\n");
 }
 
 int main()
@@ -144,26 +152,26 @@ int main()
 	bool uesr_want_to_see_fixtures;
 	char ans[1];
 
-	CLUB atletico_madrid = { "Atletico Madrid", 0 };
-	CLUB real_madrid = { "Real Madrid", 0 };
-	CLUB barcelona = { "Barcelona", 0 };
-	CLUB athletic_bilbao = { "Athletic Bilbao", 0 };
-	CLUB villarreal = { "Villarreal", 0 };
-	CLUB real_mallorca = { "Real Mallorca", 0 };
-	CLUB real_sociedad = { "Real Sociedad", 0 };
-	CLUB girona = { "Girona", 0 };
-	CLUB real_betis = { "Real Betis", 0 };
-	CLUB osasuna = { "Osasuna", 0 };
-	CLUB celta_vigo = { "Celta Vigo", 0 };
-	CLUB rayo_vallecano = { "Rayo Vallecano", 0 };
-	CLUB las_palmas = { "Las Palmas", 0 };
-	CLUB sevilla = { "Sevilla", 0 };
-	CLUB leganes = { "Leganes", 0 };
-	CLUB alaves = { "Alaves", 0 };
-	CLUB getafe = { "Getafe", 0 };
-	CLUB espanyol = { "Espanyol", 0 };
-	CLUB valencia = { "Valencia", 0 };
-	CLUB real_valladolid = { "Real Valladolid", 0 };
+	CLUB atletico_madrid = { "Atletico Madrid", 0, 0};
+	CLUB real_madrid = { "Real Madrid", 0, 0};
+	CLUB barcelona = { "Barcelona", 0, 0};
+	CLUB athletic_bilbao = { "Athletic Bilbao", 0, 0};
+	CLUB villarreal = { "Villarreal", 0, 0};
+	CLUB real_mallorca = { "Real Mallorca", 0, 0};
+	CLUB real_sociedad = { "Real Sociedad", 0, 0};
+	CLUB girona = { "Girona", 0, 0};
+	CLUB real_betis = { "Real Betis", 0, 0};
+	CLUB osasuna = { "Osasuna", 0, 0};
+	CLUB celta_vigo = { "Celta Vigo", 0, 0};
+	CLUB rayo_vallecano = { "Rayo Vallecano", 0, 0};
+	CLUB las_palmas = { "Las Palmas", 0, 0};
+	CLUB sevilla = { "Sevilla", 0, 0};
+	CLUB leganes = { "Leganes", 0, 0};
+	CLUB alaves = { "Alaves", 0, 0};
+	CLUB getafe = { "Getafe", 0, 0};
+	CLUB espanyol = { "Espanyol", 0, 0};
+	CLUB valencia = { "Valencia", 0, 0};
+	CLUB real_valladolid = { "Real Valladolid", 0, 0};
 
 	CLUB clubs[20] = {
 		 atletico_madrid,
