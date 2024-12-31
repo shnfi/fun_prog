@@ -25,28 +25,52 @@ void simulate(CLUB clubs[], bool uesr_want_to_see_fixtures)
 			{
 				int t1_goal = rand() % 6;
 				int t2_goal = rand() % 6;
-	
-				if (uesr_want_to_see_fixtures)
-					printf("%s %d - %d %s\n", clubs[i].name, t1_goal, t2_goal, clubs[j].name);
+
+				char wld;
 	
 				if (t1_goal > t2_goal)
+				{
 					clubs[i].point += 3;
-	
+					wld = 'w';
+				}
 				else if (t1_goal < t2_goal)
+				{
 					clubs[j].point += 3;
-	
+					wld = 'l';
+				}
 				else
 				{
 					clubs[i].point += 1;
 					clubs[j].point += 1;
+					wld = 'd';
+				}
+
+				if (uesr_want_to_see_fixtures)
+				{
+					if (wld == 'w')
+					{
+						printf("\033[0;32m");
+						printf("%s %d - %d %s\n", clubs[i].name, t1_goal, t2_goal, clubs[j].name);
+						printf("\033[0m");
+					}
+					if (wld == 'd')
+					{
+						printf("\033[0;37m");
+						printf("%s %d - %d %s\n", clubs[i].name, t1_goal, t2_goal, clubs[j].name);
+						printf("\033[0m");
+					}
+					else
+					{
+						printf("\033[0;31m");
+						printf("%s %d - %d %s\n", clubs[i].name, t1_goal, t2_goal, clubs[j].name);
+						printf("\033[0m");
+					}
 				}
 			}
-			else
-				continue;
 		}
 	
 		if (uesr_want_to_see_fixtures)
-			printf("#-----------------------------------#\n");
+			printf("\n#-----------------------------------#\n\n");
 	}
 
 	printf("\n");
@@ -72,8 +96,47 @@ void simulate(CLUB clubs[], bool uesr_want_to_see_fixtures)
 		}
 	}
 
+	printf("  ------------------------------------\n");
+
 	for (int i = 0; i < 20; i++)
-		printf("[%02d] %d %s\n", i + 1, clubs[i].point, clubs[i].name);
+	{
+		printf(" | ");
+
+		if (i == 0 || i == 1 || i == 2 || i == 3)
+		{
+			printf("\033[0;34m");
+			printf("# ");
+			printf("\033[0m");			
+		}
+		else if (i == 4)
+		{
+			printf("\033[0;33m");
+			printf("# ");
+			printf("\033[0m");			
+		}
+		else if (i == 5)
+		{
+			printf("\033[0;32m");
+			printf("# ");
+			printf("\033[0m");			
+		}
+		else if (i == 17 || i == 18 || i == 19)
+		{
+			printf("\033[0;31m");
+			printf("# ");
+			printf("\033[0m");
+		}
+		else
+		{
+			printf("\033[0;37m");
+			printf("# ");
+			printf("\033[0m");
+		}
+
+		printf("[%02d]   %s   %*d   |\n", i + 1, clubs[i].name, 20 - (int) strlen(clubs[i].name), clubs[i].point);
+	}
+
+	printf("  ------------------------------------\n\n");
 }
 
 int main()
@@ -125,7 +188,9 @@ int main()
 		 real_valladolid
 	};
 
-	printf("Do you want to see the game resaults too? [y/n] ");
+	system("clear");
+
+	printf("Do you want to see fixtures? [y/n] ");
 	
 	scanf("%s", ans);
 
