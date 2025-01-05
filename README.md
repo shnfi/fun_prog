@@ -24,3 +24,18 @@ AI plays snake and ladders and we see how it can learn from it's loses and grow 
 
 ## laliga table simulator
 yeah, if you like soccer and your want to simulate a whole laliga season, here you are! <br> [Wikipedia](https://en.wikipedia.org/wiki/La_Liga)
+
+## gamble game
+lets gamble but not with real money, yeah, its just a CLI slots game! <br> [Wikipedia](https://en.wikipedia.org/wiki/Slot_machine)
+
+## hashoff
+a hash cracker that i wrote at my sweet childhood. [Wikipedia](https://en.wikipedia.org/wiki/Hash)
+
+## iKer
+store information of anybody in an organized document using this program, (what a fun kid that feels his a mysterious hacker!)
+
+## playing with keyboard RGB
+a little and ordinary animation with the keyboard rgb lights, (its ordinary cuz my keyboard  kinda cheap)
+
+## shining translator
+translate plain text into binary, (ah, what a good idea!) [Wikipedia](https://en.wikipedia.org/wiki/Binary)
