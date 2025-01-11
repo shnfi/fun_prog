@@ -50,20 +50,22 @@ public :
 		int p_y = this->y;
 		int p_x = this->x;
 
-		if (this->direction == 'w')
+		if (this->direction == 'w' && map[this->y - 1][this->x] == ' ')
 			this->y -= this->speed;
 
-		else if (this->direction == 'a')
+		else if (this->direction == 'a' && map[this->y][this->x - 1] == ' ')
 			this->x -= this->speed * 2; // because we multiply the map's width to 2 (for more beautiful render)
 
-		else if (this->direction == 's')
+		else if (this->direction == 's' && map[this->y + 1][this->x] == ' ')
 			this->y += this->speed;
 
-		else if (this->direction == 'd')
+		else if (this->direction == 'd' && map[this->y][this->x + 2] == ' ')
 			this->x += this->speed * 2; // because we multiply the map's width to 2 (for more beautiful render)
 
 
 		this->render(p_y, p_x);
+
+		mvprintw(40, 20, "x: %d - y: %d", this->x, this->y);
 	}
 
 	void change_direction(char new_direction)
@@ -101,6 +103,7 @@ int main()
 	cbreak();
 	noecho();
 	nodelay(stdscr, TRUE);
+	curs_set(0);
 
 	bool abort = false;
 
