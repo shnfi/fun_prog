@@ -8,6 +8,8 @@
 
 using namespace std;
 
+char visual_map[MAP_HEIGHT][MAP_WIDTH];
+
 class CHARACTER
 {
 public :
@@ -32,6 +34,7 @@ class PLAYER : public CHARACTER
 {
 public : 
 	char direction;
+	int score;
 
 	PLAYER(int x, int y, int speed, char sprite, int health)
 	{
@@ -41,6 +44,7 @@ public :
 		this->sprite = sprite;
 		this->health = health;
 		this->direction = 'd';
+		this->score = 0;
 
 		this->render(this->y, this->x);
 	}
@@ -70,22 +74,60 @@ public :
 		}
 		else
 		{
-			if (this->direction == 'w' && map[this->y - 1][this->x] == ' ')
+			if (this->direction == 'w' && (map[this->y - 1][this->x] == ' ' || map[this->y - 1][this->x] == '.'))
+			{
+				if (visual_map[this->y - 1][this->x] == '.')
+				{
+					this->score += 1;
+					this->update_score();
+					visual_map[this->y - 1][this->x] = ' ';
+				}
+
 				this->y -= this->speed;
+			}
 
-			else if (this->direction == 'a' && map[this->y][this->x - 1] == ' ')
+			else if (this->direction == 'a' && (map[this->y][this->x - 2] == ' ' || map[this->y][this->x - 2] == '.'))
+			{
+				if (visual_map[this->y][this->x - 2] == '.')
+				{
+					this->score += 1;
+					this->update_score();
+					visual_map[this->y][this->x - 2] = ' ';
+				}
+
 				this->x -= this->speed * 2; // because we multiply the map's width to 2 (for more beautiful render)
+			}
 
-			else if (this->direction == 's' && map[this->y + 1][this->x] == ' ')
+			else if (this->direction == 's' && (map[this->y + 1][this->x] == ' ' || map[this->y + 1][this->x] == '.'))
+			{
+				if (visual_map[this->y + 1][this->x] == '.')
+				{
+					this->score += 1;
+					this->update_score();
+					visual_map[this->y + 1][this->x] = ' ';
+				}
+
 				this->y += this->speed;
+			}
 
-			else if (this->direction == 'd' && map[this->y][this->x + 2] == ' ')
+			else if (this->direction == 'd' && (map[this->y][this->x + 2] == ' ' || map[this->y][this->x + 2] == '.'))
+			{
+				if (visual_map[this->y][this->x + 2] == '.')
+				{
+					this->score += 1;
+					this->update_score();
+					visual_map[this->y][this->x + 2] = ' ';
+				}
+
 				this->x += this->speed * 2; // because we multiply the map's width to 2 (for more beautiful render)
+			}
 		}
 
 		this->render(p_y, p_x);
 
-		mvprintw(40, 20, "x: %d - y: %d", this->x, this->y); // remove this line later!
+		mvprintw(1, 54, "p: %d", this->score);
+		mvprintw(3, 54, "x: %d", this->x);
+		mvprintw(4, 54, "y: %d", this->y);
 	}
 
 	void change_direction(char new_direction)
@@ -93,6 +135,11 @@ public :
         if (new_direction == 'w' || new_direction == 'a' || new_direction == 's' || new_direction == 'd')
             this->direction = new_direction;
     }
+
+    void update_score()
+	{
+		mvprintw(1, 57, "%d", this->score);
+	}
 };
 
 class MAP
@@ -107,10 +154,8 @@ public :
 		{
 			for (int j = 0; j < width; j++)
 			{
-				if (j % 2 != 0 && map[i][j] == ' ')
-					mvprintw(i, j, ".");
-				else
-					mvprintw(i, j, "%c", map[i][j]);
+				visual_map[i][j] = map[i][j];
+				mvprintw(i, j, "%c", map[i][j]);
 			}
 	
 			printw("\n");
@@ -155,7 +200,10 @@ int main()
 
         player.move();
 
-        usleep(UPDATE_TIME);
+		refresh();
+
+        // usleep(UPDATE_TIME);
+		sleep(1);
 	}
 
 	endwin();
