@@ -5,10 +5,12 @@
 #include "map.cpp"
 
 #define UPDATE_TIME 75000
+#define MAX_POINT 336
 
 using namespace std;
 
 char visual_map[MAP_HEIGHT][MAP_WIDTH];
+bool _abort = false;
 
 class CHARACTER
 {
@@ -86,7 +88,7 @@ public :
 				this->y -= this->speed;
 			}
 
-			else if (this->direction == 'a' && (map[this->y][this->x - 2] == ' ' || map[this->y][this->x - 2] == '.'))
+			else if (this->direction == 'a' && (map[this->y][this->x - 2] == ' ' && !(this->x == 33 && (this->y == 14 || this->y == 15)) || map[this->y][this->x - 2] == '.'))
 			{
 				if (visual_map[this->y][this->x - 2] == '.')
 				{
@@ -142,7 +144,14 @@ public :
 
     void update_score()
 	{
-		mvprintw(1, 57, "%d", this->score);
+		if (this->score == MAX_POINT)
+		{
+			mvprintw(6, 54, "You won!");
+			this->speed = 0;
+			_abort = true;
+		}
+		else
+			mvprintw(1, 57, "%d", this->score);
 	}
 };
 
@@ -177,8 +186,6 @@ int main()
 	nodelay(stdscr, TRUE);
 	curs_set(0);
 
-	bool abort = false;
-
 	MAP m1;
 	m1.show_map();
 
@@ -193,7 +200,7 @@ int main()
 
 	PLAYER player(1, 1, 1, 'O', 3);
 
-	while (!abort)
+	while (!_abort)
 	{
 		int key = getch();
 
@@ -208,6 +215,8 @@ int main()
 
         usleep(UPDATE_TIME);
 	}
+
+	sleep(5);
 
 	endwin();
 	return 0;
