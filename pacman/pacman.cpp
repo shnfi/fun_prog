@@ -85,7 +85,7 @@ public :
 
 		this->render(p_y, p_x);
 
-		mvprintw(40, 20, "x: %d - y: %d", this->x, this->y);
+		mvprintw(40, 20, "x: %d - y: %d", this->x, this->y); // remove this line later!
 	}
 
 	void change_direction(char new_direction)
@@ -107,7 +107,10 @@ public :
 		{
 			for (int j = 0; j < width; j++)
 			{
-				mvprintw(i, j, "%c", map[i][j]);
+				if (j % 2 != 0 && map[i][j] == ' ')
+					mvprintw(i, j, ".");
+				else
+					mvprintw(i, j, "%c", map[i][j]);
 			}
 	
 			printw("\n");
