@@ -126,6 +126,10 @@ public :
 		this->render(p_y, p_x);
 
 		mvprintw(1, 54, "p: %d", this->score);
+
+		mvprintw(3, 58, "  ", this->x);
+		mvprintw(4, 58, "  ", this->y);
+
 		mvprintw(3, 54, "x: %d", this->x);
 		mvprintw(4, 54, "y: %d", this->y);
 	}
@@ -202,8 +206,7 @@ int main()
 
 		refresh();
 
-        // usleep(UPDATE_TIME);
-		sleep(1);
+        usleep(UPDATE_TIME);
 	}
 
 	endwin();
