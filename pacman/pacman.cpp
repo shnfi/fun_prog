@@ -50,18 +50,38 @@ public :
 		int p_y = this->y;
 		int p_x = this->x;
 
-		if (this->direction == 'w' && map[this->y - 1][this->x] == ' ')
-			this->y -= this->speed;
+		if (this->direction == 'a' && this->x == 1 && (this->y == 14 || this->y == 15))
+		{
+			this->x = 49;
 
-		else if (this->direction == 'a' && map[this->y][this->x - 1] == ' ')
-			this->x -= this->speed * 2; // because we multiply the map's width to 2 (for more beautiful render)
+			if (this->y == 14)
+				this->y  = 14;
+			else
+				this->y = 15;
+		}
+		else if (this->direction == 'd' && this->x == 49 && (this->y == 14 || this->y == 15))
+		{
+			this->x = 1;
 
-		else if (this->direction == 's' && map[this->y + 1][this->x] == ' ')
-			this->y += this->speed;
+			if (this->y == 14)
+				this->y  = 14;
+			else
+				this->y = 15;
+		}
+		else
+		{
+			if (this->direction == 'w' && map[this->y - 1][this->x] == ' ')
+				this->y -= this->speed;
 
-		else if (this->direction == 'd' && map[this->y][this->x + 2] == ' ')
-			this->x += this->speed * 2; // because we multiply the map's width to 2 (for more beautiful render)
+			else if (this->direction == 'a' && map[this->y][this->x - 1] == ' ')
+				this->x -= this->speed * 2; // because we multiply the map's width to 2 (for more beautiful render)
 
+			else if (this->direction == 's' && map[this->y + 1][this->x] == ' ')
+				this->y += this->speed;
+
+			else if (this->direction == 'd' && map[this->y][this->x + 2] == ' ')
+				this->x += this->speed * 2; // because we multiply the map's width to 2 (for more beautiful render)
+		}
 
 		this->render(p_y, p_x);
 
