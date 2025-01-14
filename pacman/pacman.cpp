@@ -4,7 +4,7 @@
 
 #include "map.cpp"
 
-#define UPDATE_TIME 75000
+#define UPDATE_TIME 60000
 #define MAX_POINT 336
 
 using namespace std;
