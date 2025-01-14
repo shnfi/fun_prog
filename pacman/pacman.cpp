@@ -151,7 +151,7 @@ public :
 			_abort = true;
 		}
 		else
-			mvprintw(1, 57, "%d", this->score);
+			mvprintw(1, 57, "%d / 336", this->score);
 	}
 };
 
