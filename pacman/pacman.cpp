@@ -174,42 +174,40 @@ public :
 		this->render('e', this->y, this->x);
 	}
 
-	void move()
+	void move(int player_x, int player_y)
 	{
 		int p_y = this->y;
 		int p_x = this->x;
 
-		if (this->direction == 'a' && this->x == 1 && (this->y == 14 || this->y == 15))
+		if (this->x > player_x)
 		{
-			this->x = 49;
-
-			if (this->y == 14)
-				this->y  = 14;
-			else
-				this->y = 15;
+			if (map[this->y][this->x - 2] == ' ' || map[this->y][this->x - 2] == '.')
+				this->x -= this->speed * 2;
 		}
-		else if (this->direction == 'd' && this->x == 49 && (this->y == 14 || this->y == 15))
-		{
-			this->x = 1;
 
-			if (this->y == 14)
-				this->y  = 14;
-			else
-				this->y = 15;
-		}
-		else
+		if (this->x < player_x)
 		{
-			if (this->direction == 'w' && (map[this->y - 1][this->x] == ' ' || map[this->y - 1][this->x] == '.'))
+			if (map[this->y][this->x + 2] == ' ' || map[this->y][this->x + 2] == '.')
+				this->x += this->speed * 2;
+		}
+
+		if (this->y > player_y)
+		{
+			if (map[this->y - 1][this->x] == ' ' || map[this->y - 1][this->x] == '.')
 				this->y -= this->speed;
+		}
 
-			else if (this->direction == 'a' && (map[this->y][this->x - 2] == ' ' && !(this->x == 33 && (this->y == 14 || this->y == 15)) || map[this->y][this->x - 2] == '.'))
-				this->x -= this->speed * 2; // because we multiply the map's width to 2 (for more beautiful render)
-
-			else if (this->direction == 's' && (map[this->y + 1][this->x] == ' ' || map[this->y + 1][this->x] == '.'))
+		if (this->y < player_y)
+		{
+			if (map[this->y + 1][this->x] == ' ' || map[this->y + 1][this->x] == '.')
 				this->y += this->speed;
+		}
 
-			else if (this->direction == 'd' && (map[this->y][this->x + 2] == ' ' || map[this->y][this->x + 2] == '.'))
-				this->x += this->speed * 2; // because we multiply the map's width to 2 (for more beautiful render)
+		if (this->x == player_x && this->y == player_y)
+		{
+			mvprintw(6, 54, "You lost!");
+			this->speed = 0;
+			_abort = true;
 		}
 
 		this->render('e', p_y, p_x);
@@ -275,8 +273,11 @@ int main()
 
         player.move();
 
-		normal_enemy1.move();
-		normal_enemy2.move();
+		int player_x = player.x;
+		int player_y = player.y;
+
+		normal_enemy1.move(player_x, player_y);
+		normal_enemy2.move(player_x, player_y);
 
 		refresh();
 
