@@ -181,7 +181,7 @@ public :
 
 		if (this->x > player_x)
 		{
-			if (map[this->y][this->x - 2] == ' ' || map[this->y][this->x - 2] == '.')
+			if ((map[this->y][this->x - 2] == ' ' || map[this->y][this->x - 2] == '.') && !(this->x == 33 && (this->y == 14 || this->y == 15)) || map[this->y][this->x - 2] == '.')
 				this->x -= this->speed * 2;
 		}
 
