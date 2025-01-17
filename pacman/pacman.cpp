@@ -25,7 +25,12 @@ public :
 	void render(char role, int p_y, int p_x)
 	{
 		if (role == 'e')
-			mvprintw(p_y, p_x, ".");
+		{
+			if (visual_map[p_y][p_x] == '.')
+				mvprintw(p_y, p_x, ".");
+			else
+				mvprintw(p_y, p_x, " ");
+		}
 		else if (role == 'p')
 			mvprintw(p_y, p_x, " ");
 
@@ -181,7 +186,7 @@ public :
 
 		if (this->x > player_x)
 		{
-			if ((map[this->y][this->x - 2] == ' ' || map[this->y][this->x - 2] == '.') && !(this->x == 33 && (this->y == 14 || this->y == 15)) || map[this->y][this->x - 2] == '.')
+			if ((map[this->y][this->x - 2] == ' ' || map[this->y][this->x - 2] == '.') && !(this->x == 33 && (this->y == 14 || this->y == 15)) && map[this->y][this->x - 2] == ' ' || map[this->y][this->x - 2] == '.')
 				this->x -= this->speed * 2;
 		}
 
