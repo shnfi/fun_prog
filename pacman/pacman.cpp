@@ -80,49 +80,49 @@ public :
 		}
 		else
 		{
-			if (this->direction == 'w' && (map[this->y - 1][this->x] == ' ' || map[this->y - 1][this->x] == '.'))
+			if (this->direction == 'w' && (map[this->y - this->speed][this->x] == ' ' || map[this->y - this->speed][this->x] == '.'))
 			{
-				if (visual_map[this->y - 1][this->x] == '.')
+				if (visual_map[this->y - this->speed][this->x] == '.')
 				{
 					this->score += 1;
 					this->update_score();
-					visual_map[this->y - 1][this->x] = ' ';
+					visual_map[this->y - this->speed][this->x] = ' ';
 				}
 
 				this->y -= this->speed;
 			}
 
-			else if (this->direction == 'a' && (map[this->y][this->x - 2] == ' ' && !(this->x == 33 && (this->y == 14 || this->y == 15)) || map[this->y][this->x - 2] == '.'))
+			else if (this->direction == 'a' && (map[this->y][this->x - this->speed * 2] == ' ' && !(this->x == 33 && (this->y == 14 || this->y == 15)) || map[this->y][this->x - this->speed * 2] == '.'))
 			{
-				if (visual_map[this->y][this->x - 2] == '.')
+				if (visual_map[this->y][this->x - this->speed * 2] == '.')
 				{
 					this->score += 1;
 					this->update_score();
-					visual_map[this->y][this->x - 2] = ' ';
+					visual_map[this->y][this->x - this->speed * 2] = ' ';
 				}
 
 				this->x -= this->speed * 2; // because we multiply the map's width to 2 (for more beautiful render)
 			}
 
-			else if (this->direction == 's' && (map[this->y + 1][this->x] == ' ' || map[this->y + 1][this->x] == '.'))
+			else if (this->direction == 's' && (map[this->y + this->speed][this->x] == ' ' || map[this->y + this->speed][this->x] == '.'))
 			{
-				if (visual_map[this->y + 1][this->x] == '.')
+				if (visual_map[this->y + this->speed][this->x] == '.')
 				{
 					this->score += 1;
 					this->update_score();
-					visual_map[this->y + 1][this->x] = ' ';
+					visual_map[this->y + this->speed][this->x] = ' ';
 				}
 
 				this->y += this->speed;
 			}
 
-			else if (this->direction == 'd' && (map[this->y][this->x + 2] == ' ' || map[this->y][this->x + 2] == '.'))
+			else if (this->direction == 'd' && (map[this->y][this->x + this->speed * 2] == ' ' || map[this->y][this->x + this->speed * 2] == '.'))
 			{
-				if (visual_map[this->y][this->x + 2] == '.')
+				if (visual_map[this->y][this->x + this->speed * 2] == '.')
 				{
 					this->score += 1;
 					this->update_score();
-					visual_map[this->y][this->x + 2] = ' ';
+					visual_map[this->y][this->x + this->speed * 2] = ' ';
 				}
 
 				this->x += this->speed * 2; // because we multiply the map's width to 2 (for more beautiful render)
