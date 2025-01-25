@@ -24,24 +24,28 @@ int main()
 	nodelay(stdscr, TRUE);
 	curs_set(0);
 
+	int attemps = 0;
 	int y = 5;
 
 	for (int i = 0; i < HEIGHT; i++)
 	{
 		for (int j = 0; j < WIDTH; j++)
-		{
 			mvprintw(i, j, "%c", map[i][j]);
-		}
 
 		printw("\n");
 	}
 
 	while (true)
 	{
-		mvprintw(10, 10, "y: %d", y);
+		mvprintw(9, 10, "y: %d", y);
+		mvprintw(10, 10, "attemps: %d", attemps);
 
 		mvprintw(y - 1, 3, " ");
-		mvprintw(y + 1, 3, " ");
+
+		if ((y + 1) == 10)
+			mvprintw(y + 1, 3, "_");
+		else
+			mvprintw(y + 1, 3, " ");
 
 		mvprintw(y, 3, "A");
 
@@ -61,6 +65,7 @@ int main()
 		}
 
 		try_to_move(&y);
+		attemps++;
 
 		sleep(1);
 	}
