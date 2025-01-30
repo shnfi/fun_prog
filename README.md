@@ -39,3 +39,6 @@ a little and ordinary animation with the keyboard rgb lights, (its ordinary cuz 
 
 ## shining translator
 translate plain text into binary, (ah, what a good idea!) [Wikipedia](https://en.wikipedia.org/wiki/Binary)
+
+## file random rename
+have you ever had some useless and shit files on the desktop that you dont want to delete them ? so rename them time to time !
